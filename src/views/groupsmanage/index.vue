@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
-    <div style="height:60px">
-      <el-button style="float:right;" type="primary">添加分组</el-button>
+    <div style="height:60px;text-align:center">
+      <el-button type="primary">添加分组</el-button>
     </div>
     <el-table
       v-loading="listLoading"
@@ -38,7 +38,14 @@
         </template>
       </el-table-column>
       <el-table-column align="center" label="组员详情">
-        <el-button type="text">...</el-button>
+        <template slot-scope="scope">
+        <router-link :to="'/members?groupId='+scope.row.id">...</router-link>
+        </template>
+      </el-table-column>
+      <el-table-column align="center" label="抑制详情">
+        <template>
+          
+        </template>
       </el-table-column>
       <el-table-column align="center" label="删除">
         <template slot-scope="scope">

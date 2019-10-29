@@ -46,7 +46,14 @@ export const constantRoutes = [
       path: 'groupsmanage',
       name: 'GroupsManage',
       component: () => import('@/views/groupsmanage/index'),
-      meta: { title: '分组管理'},
+      meta: { title: '分组管理'}
+    },
+    {
+      path:'/members',
+      name:'Members',
+      component:()=>import('@/views/members'),
+      meta:{title:'项目组成员'},
+      hidden:true
     }]
   },
 
