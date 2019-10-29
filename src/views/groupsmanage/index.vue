@@ -1,7 +1,8 @@
 <template>
   <div class="app-container">
     <div style="height:60px;text-align:center">
-      <el-button type="primary">添加分组</el-button>
+      <el-button type="primary" @click="addGroup">添加分组</el-button>
+      <AddForm v-if="show" @close='show =false' :addType="add"></AddForm>
     </div>
     <el-table
       v-loading="listLoading"
@@ -42,9 +43,9 @@
         <router-link :to="'/members?groupId='+scope.row.id">...</router-link>
         </template>
       </el-table-column>
-      <el-table-column align="center" label="抑制详情">
-        <template>
-          
+      <el-table-column align="center" label="抑制规则">
+        <template slot-scope="scope">
+          <el-button type="info" @click="goTo('/inhibitions',scope.row.id)">抑制详情</el-button>
         </template>
       </el-table-column>
       <el-table-column align="center" label="删除">
@@ -81,10 +82,13 @@
 <script>
 // import { getList } from '@/api/table'
 import { getGroups, updateGroup,deleteGroup } from "@/api/groups";
+import AddForm from '@/components/AddForm'
 export default {
   data() {
     return {
+      add:'',
       list: [],
+      show:false,
       listLoading: false,
       showUpdate: false,
       currGroup:null
@@ -121,7 +125,22 @@ export default {
         this.$delete(this.list,index);
         console.log(res.data);
       });
+    },
+    goTo(url,...arr){
+      if(arr.length>0){
+        arr.forEach(a=>{
+          url+='/'+a;
+        });
+      }
+      this.$router.push(url);
+    },
+    addGroup(){
+      this.add="group";
+      this.show = true;
     }
+  },
+  components:{
+    AddForm
   }
 };
 </script>

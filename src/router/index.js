@@ -54,6 +54,13 @@ export const constantRoutes = [
       component:()=>import('@/views/members'),
       meta:{title:'项目组成员'},
       hidden:true
+    },
+    {
+      path:"/inhibitions/:id",
+      name:"Inhibitions",
+      component:()=>import("@/views/inhibitions"),
+      meta:{title:"抑制规则"},
+      hidden:true
     }]
   },
 

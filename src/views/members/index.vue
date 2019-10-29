@@ -1,7 +1,8 @@
 <template>
     <div class="members">
         <div class="add-member">
-            <el-button type="success">添加新组员</el-button>
+            <el-button type="success" @click="show=true">添加新组员</el-button>
+            <AddForm v-if="show"  @close="show=false" :addType='"member"'></AddForm>
         </div>
         <el-table :data="list">
             <el-table-column label="ID">
@@ -37,9 +38,11 @@
 
 <script>
 import {getMembers,deleteMember} from "@/api/groups.js"
+import AddForm from '@/components/AddForm'
 export default {
     data(){
         return {
+            show:false,
             list:[]
         }
     },
@@ -56,6 +59,9 @@ export default {
                 console.log(res.data);
             });
         }
+    },
+    components:{
+        AddForm
     }
 }
 </script>

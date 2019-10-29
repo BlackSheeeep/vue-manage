@@ -32,10 +32,14 @@ export function getInhibitions(groupId){
         method:'get',
     });
 }
-export function addInhibitions(groupId){
+export function addInhibition(groupId,data){
+    console.log(data);
     return request({
         url:`/groups/inhibitions/${groupId}`,
-        method:'post'
+        method:'post',
+        data:{
+            inhibition:data
+        }
     });
 }
 
