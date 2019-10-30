@@ -43,7 +43,7 @@ export function addInhibition(groupId,data){
     });
 }
 
-export function getHistories(groupId){
+export function getHistory(groupId){
     return request({
         url:`/history/${groupId}`,
         method:'get'

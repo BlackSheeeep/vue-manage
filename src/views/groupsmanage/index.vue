@@ -48,6 +48,11 @@
           <el-button type="info" @click="goTo('/inhibitions',scope.row.id)">抑制详情</el-button>
         </template>
       </el-table-column>
+      <el-table-column align = "center" label="历史记录">
+        <template slot-scope="scope">
+          <el-button type="info" @click="goTo('/history',scope.row.id)">查看历史记录</el-button>
+        </template>
+      </el-table-column>
       <el-table-column align="center" label="删除">
         <template slot-scope="scope">
           <el-button type="danger" @click="deleteCurrRow(scope.$index,scope.row)">删除</el-button>

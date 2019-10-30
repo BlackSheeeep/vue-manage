@@ -61,7 +61,14 @@ export const constantRoutes = [
       component:()=>import("@/views/inhibitions"),
       meta:{title:"抑制规则"},
       hidden:true
-    }]
+    },
+  {
+    path:'/history/:id',
+    name:'history',
+    component:()=>import("@/views/history"),
+    meta:{title:'历史记录'},
+    hidden:true
+  }]
   },
 
  
