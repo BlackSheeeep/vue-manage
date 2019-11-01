@@ -85,7 +85,6 @@
 </template>
 
 <script>
-// import { getList } from '@/api/table'
 import { getGroups, updateGroup,deleteGroup } from "@/api/groups";
 import AddForm from '@/components/AddForm'
 export default {
