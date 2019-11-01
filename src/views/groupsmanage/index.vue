@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="app-container" >
     <div style="height:60px;text-align:center">
       <el-button type="primary" @click="addGroup">添加分组</el-button>
       <AddForm v-if="show" @close='show =false' :addType="add"></AddForm>
@@ -25,12 +25,12 @@
       </el-table-column>
       <el-table-column label="接收邮件" align="center">
         <template slot-scope="scope">
-          <i :class="scope.row.isReceiveMail?'el-icon-check':'el-icon-close'" />
+          <i :class="scope.row.receiveMail?'el-icon-check':'el-icon-close'" />
         </template>
       </el-table-column>
       <el-table-column label="接收短信" align="center">
         <template slot-scope="scope">
-          <i :class="scope.row.isReceiveSms?'el-icon-check':'el-icon-close'" />
+          <i :class="scope.row.receiveSms?'el-icon-check':'el-icon-close'" />
         </template>
       </el-table-column>
       <el-table-column align="center" label="更新">
@@ -67,12 +67,12 @@
       <h3>业务代码:</h3>
       {{currGroup.businessCode}}
       <h3>接收邮件:</h3>
-      <el-radio-group v-model="currGroup.isReceiveMail">
+      <el-radio-group v-model="currGroup.receiveMail">
         <el-radio :label="true">是</el-radio>
         <el-radio :label="false">否</el-radio>
       </el-radio-group>
       <h3>接收短信:</h3>
-      <el-radio-group v-model="currGroup.isReceiveSms">
+      <el-radio-group v-model="currGroup.receiveSms">
         <el-radio :label="true">是</el-radio>
         <el-radio :label="false">否</el-radio>
       </el-radio-group>
@@ -101,11 +101,12 @@ export default {
   created() {
     this.fetchData();
   },
-  methods: {
+  methods: { 
+    
     fetchData() {
       // this.listLoading = true
       getGroups().then(response => {
-        this.listLoading = false;
+        this.listLoading= false;
         this.list = response.data;
       });
     },

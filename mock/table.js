@@ -17,7 +17,7 @@ export default [
     type: 'get',
     response: config => {
       const items = data.items
-      return {
+      return { 
         code: 20000,
         data: {
           total: items.length,

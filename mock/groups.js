@@ -4,8 +4,8 @@ const data = Mock.mock({
         id:'@id',
         'groupName|2-6':'asd',
         'businessCode|2-6':'rbg',
-        'isReceiveMail|1':true,
-        'isReceiveSms|1':false,
+        'receiveMail|1':true,
+        'receiveSms|1':false,
         'members|20-35':[{
             id:'@id',
             'username|1-10':"wqs",
@@ -88,7 +88,8 @@ export default [
     {
         url:'/groups',
         type:'get',
-        response(config){
+        response(req){
+            console.log(req.url)
             const items = data.groups;
           return {
             code:400920,
@@ -132,6 +133,7 @@ export default [
         response(req){
             let strs = req.url.split("/");
             let id = strs.pop();
+            console.log(req.url);
             // id = parseInt(id);
                 for(let a of data.groups){
                 if(a.id.toString()===id.toString()){
@@ -181,7 +183,7 @@ export default [
         url:'/members/?',
         type:'post',
         response(req){
-            console.log(req.body)
+            console.log(req.url)
             return {
                 code:400934,
                 data:'add member success'
