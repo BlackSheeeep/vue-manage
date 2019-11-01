@@ -38,9 +38,7 @@ module.exports = {
     },
     proxy: {
       // change xxx-api/login => mock/login
-      // detail: https://cli.vuejs.org/config/#devserver-proxy
       [process.env.VUE_APP_BASE_API]: {
-        // target: `http://www.sosoapi.com/pass/mock/16569/`,
         target:'http://localhost:9528/mock',
         changeOrigin: true,
         pathRewrite: {

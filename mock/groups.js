@@ -5,11 +5,86 @@ const data = Mock.mock({
         'groupName|2-6':'asd',
         'businessCode|2-6':'rbg',
         'isReceiveMail|1':true,
-        'isReceiveSms|1':false
-    }]
+        'isReceiveSms|1':false,
+        'members|20-35':[{
+            id:'@id',
+            'username|1-10':"wqs",
+            'phone':'123412412',
+            'email':'123@qq.com'
+        }],
+        'inhibitions|10-30':[
+            "asfdasdf"
+        ],
+        'history|5-20':[{
+            id:"@id",
+            to:"mr.bigglesworth",
+            mode:"email",
+            content:"hello ms.li",
+            groupName:"test",
+            businessCode:"test",
+            status:"success",
+            sendTime:Date.now()
 
+        }]
+    }],
+   
+    
 });
 export default [
+    {
+        url:'/groups/inhibitions/?',
+        type:'get',
+        response(req){
+            const strs = req.url.split("/");
+            const groupId = strs.pop();
+            for(let i in data.groups){
+                if(data.groups[i].id===groupId){
+                    console.log("??");
+                    return {
+                        code:400920,
+                        data:data.groups[i].inhibitions
+                    }
+                }
+            }
+        }
+    },
+    {
+        url:'/history/?',
+        type:'get',
+        response(req){
+            const strs = req.url.split("/");
+            const groupId = strs.pop();
+            for(let a of data.groups){
+                if(a.id.toString() === groupId){
+                    return {
+                        code:400920,
+                        data:a.history
+                    }
+                }
+            }
+        }
+    },
+    {
+        url:'/groups/inhibitions/?',
+        type:'post',
+        response(req){
+            console.log(req.body);
+            return {
+                code:400920,
+                data:'add inhibition success'
+            }
+        }
+    },
+    {
+        url:'/groups',
+        type:'post',
+        response(req){
+            return {
+                code:400930,
+                data:'add group success'
+            }
+        }
+    },
     {
         url:'/groups',
         type:'get',
@@ -36,21 +111,82 @@ export default [
     {
         url:'/groups',
         type:'delete',
-        response(config){
+        response(req){
+            let id = req.query.id;
+            for(let index in data.groups){
+                if(data.groups[index].id===id){
+                    data.groups.splice(index,1);
+                    break;
+                }
+            }
             return {
                 code:400931,
                 data:'delete success'
             }
         }
     },
+  
     {
-        url:'/groups/inhibitions',
+        url:'/members/?',
         type:'get',
-        response(){
+        response(req){
+            let strs = req.url.split("/");
+            let id = strs.pop();
+            // id = parseInt(id);
+                for(let a of data.groups){
+                if(a.id.toString()===id.toString()){
+                    return {
+                        code:400920,
+                        data:a.members
+                    }
+                }
+            }
             return {
-                code:400920,
-                data:""
+                code:400940,
+                msg:'未找到'
+            }
+        }
+    },
+    {
+        url:'/members/?/?',
+        type:'delete',
+        response(req){
+            let strs = req.url.split('/');
+            let userId = strs.pop();
+            let groupId = strs.pop();
+
+            console.log("userId:"+userId);
+            console.log("groupId:"+groupId);
+            for(let i1 in data.groups){
+                if(data.groups[i1].id.toString()===groupId.toString()){
+                    for(let i2 in data.groups[i1].members){
+                        if(data.groups[i1].members[i2].id === userId.toString()){
+                            data.groups[i1].members.splice(i2,1);
+                            return {
+                                code:400920,
+                                data:"delete success"
+                            }
+                        }
+                    }
+                }
+            }
+
+            return {
+                code:400953,
+                data:'delete failed'
+            }
+        }
+    },
+    {
+        url:'/members/?',
+        type:'post',
+        response(req){
+            console.log(req.body)
+            return {
+                code:400934,
+                data:'add member success'
             }
         }
     }
+    
 ]
