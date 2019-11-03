@@ -47,7 +47,6 @@ export default {
         }
     },
     mounted(){
-        console.log(this.$route.query);
         getMembers(this.$route.query.groupId).then(res=>{
             this.list = res.data;
         });
@@ -56,7 +55,6 @@ export default {
         deleteMember(groupId,userId,index){
             deleteMember(groupId,userId).then(res=>{
                 this.list.splice(index,1);
-                console.log(res.data);
             });
         }
     },

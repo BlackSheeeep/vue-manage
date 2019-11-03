@@ -36,9 +36,7 @@ export default {
         }
     },
     mounted(){
-        console.log(this.$route.params.id);
         getInhibitions(this.$route.params.id).then(res=>{
-            console.log(res.data);
             this.list = res.data;
         });
     },

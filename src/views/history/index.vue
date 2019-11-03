@@ -3,7 +3,7 @@
         <el-table :data="list">
             <el-table-column label="ID">
                 <template slot-scope="scope">
-                    {{scope.$index}}
+                    {{scope.$index+1}}
                 </template>
             </el-table-column>
             <el-table-column label="TO">
@@ -55,7 +55,6 @@ export default {
     mounted(){
         getHistory(this.$route.params.id).then(res=>{
             this.list = res.data;
-            console.log(res.data);
         },
         err=>{
             console.log(err);

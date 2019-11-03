@@ -13,7 +13,7 @@
       highlight-current-row
     >
       <el-table-column align="center" label="ID">
-        <template slot-scope="scope">{{ scope.$index }}</template>
+        <template slot-scope="scope">{{ scope.$index+1 }}</template>
       </el-table-column>
       <el-table-column label="组名" align="center">
         <template slot-scope="scope">{{ scope.row.groupName }}</template>
@@ -117,7 +117,6 @@ export default {
     updateSubmit(){
       updateGroup(this.currGroup).then(res=>{
         this.currGroup = null;
-        console.log(res.data);
       });
       this.showUpdate = false;
     },
@@ -128,7 +127,6 @@ export default {
     deleteCurrRow(index,group){
       deleteGroup(group.id).then(res=>{
         this.$delete(this.list,index);
-        console.log(res.data);
       });
     },
     goTo(url,...arr){
@@ -161,7 +159,7 @@ export default {
     width: 450px;
     height: 600px;
     padding: 30px;
-    top: 20%;
+    top: 10%;
     left: 40%;
     .bottom-buttons{
       height:130px;

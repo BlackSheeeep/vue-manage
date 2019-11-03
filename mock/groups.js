@@ -39,7 +39,7 @@ export default [
             const groupId = strs.pop();
             for(let i in data.groups){
                 if(data.groups[i].id===groupId){
-                    console.log("??");
+                    ("??");
                     return {
                         code:400920,
                         data:data.groups[i].inhibitions
@@ -68,7 +68,6 @@ export default [
         url:'/groups/inhibitions/?',
         type:'post',
         response(req){
-            console.log(req.body);
             return {
                 code:400920,
                 data:'add inhibition success'
@@ -89,7 +88,6 @@ export default [
         url:'/groups',
         type:'get',
         response(req){
-            console.log(req.url)
             const items = data.groups;
           return {
             code:400920,
@@ -133,7 +131,6 @@ export default [
         response(req){
             let strs = req.url.split("/");
             let id = strs.pop();
-            console.log(req.url);
             // id = parseInt(id);
                 for(let a of data.groups){
                 if(a.id.toString()===id.toString()){
@@ -157,8 +154,6 @@ export default [
             let userId = strs.pop();
             let groupId = strs.pop();
 
-            console.log("userId:"+userId);
-            console.log("groupId:"+groupId);
             for(let i1 in data.groups){
                 if(data.groups[i1].id.toString()===groupId.toString()){
                     for(let i2 in data.groups[i1].members){
@@ -183,7 +178,6 @@ export default [
         url:'/members/?',
         type:'post',
         response(req){
-            console.log(req.url)
             return {
                 code:400934,
                 data:'add member success'

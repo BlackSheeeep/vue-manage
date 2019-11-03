@@ -70,7 +70,6 @@ const switchs = {
         return addGroup(self.group);
     },
     'inhibition':function(self){
-        console.log("asda");
         return addInhibition(self.$route.params.groupId,self.inhibition);
     },
     'member':function(self){
@@ -134,14 +133,12 @@ export default {
               if(valid){
                   switchs[type](this).then(res=>{
                       this.$emit('close');
-                      console.log(res.data);
                   });
               }
           });
       },
       cancel(){
           this.$emit('close');
-
       }
   }
 };
@@ -149,7 +146,7 @@ export default {
 <style lang="scss">
 .add-form{
     position:fixed;
-    top:30%;
+    top:10%;
     left:40%;
     height:600px;
     width:450px;

@@ -3,22 +3,6 @@ import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 
-// const stateCodes = {
-//   400920:'请求成功',
-//   400930:'添加业务组成功',
-//   400931:'删除业务成功',
-//   400932:'修改业务成功',
-//   400933:'移除业务组成员成功',
-//   400934:'添加业务组成员成功',
-//   400950:'添加业务失败',
-//   400951:'删除业务失败',
-//   400952:'修改业务失败',
-//   400953:'移除业务组成员失败',
-//   400954:'添加业务组成员失败',
-//   400940:'错误请求'
-
-
-// }
 
 // create an axios instance
 const service = axios.create({
@@ -43,7 +27,7 @@ service.interceptors.response.use(
     const res = response.data
 
     // if the custom code is not 20000, it is judged as an error.
-    if (res.code >= 400940) {
+    if (res.code&&res.code >= 400940) {
       Message({
         message: res.msg || 'Error',
         type: 'error',
