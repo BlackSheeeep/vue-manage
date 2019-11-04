@@ -31,7 +31,7 @@
         <el-button class="cancel" type="danger" @click="cancel">取消</el-button>
       </div>
     </el-form>
-    <el-form class="add-inhibition" ref="inhibition" :model="inhibition"  v-else-if="addType==='inhibition'">
+    <el-form class="add-inhibition" ref="inhibition"  :model="$data" v-else-if="addType==='inhibition'">
       <el-form-item prop='inhibition'>
         <h3>抑制信息</h3>
         <el-input v-model="inhibition"></el-input>
@@ -70,10 +70,10 @@ const switchs = {
         return addGroup(self.group);
     },
     'inhibition':function(self){
-        return addInhibition(self.$route.params.groupId,self.inhibition);
+        return addInhibition(self.$route.params.id,self.inhibition);
     },
     'member':function(self){
-        return addMember(self.$route.params.groupId,self.member);
+        return addMember(self.$route.query.groupId,self.member);
     }
 }
 export default {
@@ -133,6 +133,7 @@ export default {
               if(valid){
                   switchs[type](this).then(res=>{
                       this.$emit('close');
+                      this.$emit("update-data");
                   });
               }
           });

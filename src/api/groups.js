@@ -29,7 +29,7 @@ export function addGroup(data){
 export function getInhibitions(groupId){
     return request({
         url:`/groups/inhibitions/${groupId}`,
-        method:'get',
+        method:'get'
     });
 }
 export function addInhibition(groupId,data){
@@ -37,15 +37,18 @@ export function addInhibition(groupId,data){
     return request({
         url:`/groups/inhibitions/${groupId}`,
         method:'post',
-        data:{
-            inhibition:data
-        }
+        data
     });
 }
-
-export function getHistory(groupId){
+export function deleteInhibition(groupId,inhibitionId){
     return request({
-        url:`/history/${groupId}`,
+        url:`/groups/${groupId}/${inhibitionId}`,
+        method:'delete'
+    });
+}
+export function getHistory(businessCode){
+    return request({
+        url:`/history/${businessCode}`,
         method:'get'
     });
 }

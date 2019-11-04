@@ -1,6 +1,6 @@
 <template>
     <div class="inhibitions">
-        <div class="add-inhibitions">
+        <div class="add-inhibitions" @update-data="updateData">
             <el-button type="success" @click="addInhibition">添加抑制信息</el-button>
             <AddForm v-if="show" @close="show=false" :addType="'inhibition'" ></AddForm>
         </div>
@@ -17,7 +17,7 @@
             </el-table-column>
             <el-table-column align="center" label="操作">
                 <template slot-scope="scope">
-                    <el-button type='danger' @click="deleteOne(scope.$index)">删除</el-button>
+                    <el-button type='danger' @click="deleteOne(scope.row.id,scope.$index)">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import {getInhibitions} from "@/api/groups.js"
+import {getInhibitions,deleteInhibition} from "@/api/groups.js"
 import AddForm from '@/components/AddForm'
 export default {
     data(){
@@ -36,16 +36,25 @@ export default {
         }
     },
     mounted(){
+        console.log(this.$route.params.id);
         getInhibitions(this.$route.params.id).then(res=>{
+            console.log(res);
             this.list = res.data;
         });
     },
     methods:{
-        deleteOne(index){
-
+        deleteOne(id,index){
+            deleteInhibition(this.$route.params.id,id).then(res=>{
+                this.list.splice(index,1);
+            });
         },
         addInhibition(){
             this.show=true;
+        },
+        updateData(){
+            getInhibitions(this.$route.params.id).then(res=>{
+                this.list = res.data;
+            })
         }
     },
     components:{

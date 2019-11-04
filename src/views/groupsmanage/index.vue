@@ -50,7 +50,7 @@
       </el-table-column>
       <el-table-column align = "center" label="历史记录">
         <template slot-scope="scope">
-          <el-button type="info" @click="goTo('/history',scope.row.id)">查看历史记录</el-button>
+          <el-button type="info" @click="goTo('/history',scope.row.businessCode)">查看历史记录</el-button>
         </template>
       </el-table-column>
       <el-table-column align="center" label="删除">
@@ -104,19 +104,20 @@ export default {
   methods: { 
     
     fetchData() {
-      // this.listLoading = true
+      this.listLoading = true
       getGroups().then(response => {
         this.listLoading= false;
         this.list = response.data;
       });
     },
     update(group) {
-      this.currGroup = group;
+      this.currGroup = Object.assign({},group);
       this.showUpdate = true;
     },
     updateSubmit(){
       updateGroup(this.currGroup).then(res=>{
         this.currGroup = null;
+        this.fetchData();
       });
       this.showUpdate = false;
     },
@@ -130,6 +131,7 @@ export default {
       });
     },
     goTo(url,...arr){
+      console.log(arr);
       if(arr.length>0){
         arr.forEach(a=>{
           url+='/'+a;

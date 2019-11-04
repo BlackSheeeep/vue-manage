@@ -2,7 +2,7 @@
     <div class="members">
         <div class="add-member">
             <el-button type="success" @click="show=true">添加新组员</el-button>
-            <AddForm v-if="show"  @close="show=false" :addType='"member"'></AddForm>
+            <AddForm v-if="show" @update-data="updateData" @close="show=false" :addType='"member"'></AddForm>
         </div>
         <el-table :data="list">
             <el-table-column label="ID">
@@ -56,6 +56,11 @@ export default {
             deleteMember(groupId,userId).then(res=>{
                 this.list.splice(index,1);
             });
+        },
+        updateData(){
+            getMembers(this.$route.query.groupId).thne(res=>{
+                this.list = res.data;
+            })
         }
     },
     components:{

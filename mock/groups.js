@@ -39,11 +39,8 @@ export default [
             const groupId = strs.pop();
             for(let i in data.groups){
                 if(data.groups[i].id===groupId){
-                    ("??");
-                    return {
-                        code:400920,
-                        data:data.groups[i].inhibitions
-                    }
+                    console.log(data.groups[i].inhibitions);
+                    return data.groups[i].inhibitions;
                 }
             }
         }
@@ -56,10 +53,8 @@ export default [
             const groupId = strs.pop();
             for(let a of data.groups){
                 if(a.id.toString() === groupId){
-                    return {
-                        code:400920,
-                        data:a.history
-                    }
+                    return a.history
+                    
                 }
             }
         }
@@ -68,20 +63,15 @@ export default [
         url:'/groups/inhibitions/?',
         type:'post',
         response(req){
-            return {
-                code:400920,
-                data:'add inhibition success'
-            }
+            return 'add inhibition success'
         }
     },
     {
         url:'/groups',
         type:'post',
         response(req){
-            return {
-                code:400930,
-                data:'add group success'
-            }
+            return 'add group success'
+            
         }
     },
     {
@@ -89,12 +79,10 @@ export default [
         type:'get',
         response(req){
             const items = data.groups;
-          return {
-            code:400920,
-            data:[
+          return [
                 ...items
             ]
-          }
+          
         }
     },
     {
@@ -134,10 +122,8 @@ export default [
             // id = parseInt(id);
                 for(let a of data.groups){
                 if(a.id.toString()===id.toString()){
-                    return {
-                        code:400920,
-                        data:a.members
-                    }
+                    return a.members
+                    
                 }
             }
             return {
